@@ -71,11 +71,7 @@ class CustomElevatedButton extends StatelessWidget {
       height: 50,
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF99B7CF), Colors.amber],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
+     gradient: GlobalVariables.gradient,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: ElevatedButton(

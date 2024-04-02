@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studyhub/core/common/clipper_widget.dart';
 import 'package:studyhub/core/common/custom_widgets.dart';
 import 'package:studyhub/core/constants/global_variables.dart';
+import 'package:studyhub/screens/home/home_screen.dart';
 import 'package:studyhub/screens/register/register_screen.dart';
 
 class MyWidget extends StatelessWidget {
@@ -90,6 +90,7 @@ class LoginScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CustomElevatedButton(
                         onTap: () {
+                          HomeScreen.navigate(context);
                           if (signupFormkey.currentState!.validate()) {
                             print('Validateeeeeeeeeeeeeeeeeedddddd');
                           }
@@ -114,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                       },
                       icon: Icon(Icons.app_registration),
                       label: Text('Register')),
-                  CustomShapedContainer()
+                  const CustomShapedContainer()
                 ],
               ),
             ],
@@ -184,7 +185,7 @@ class CustomShapedContainerTop extends StatelessWidget {
       clipper: CustomShapeClipperTop(),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.amber.shade200,
+          gradient: GlobalVariables.gradient,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -230,7 +231,7 @@ class CustomShapedContainer extends StatelessWidget {
       clipper: CustomShapeClipper(),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.amber.shade200,
+          gradient: GlobalVariables.gradient,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),

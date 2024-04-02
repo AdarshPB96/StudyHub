@@ -30,6 +30,7 @@ environment:
 dependencies:
   csc_picker: ^0.2.7
   cupertino_icons: ^1.0.2
+  file_picker: ^8.0.0+1
   flutter:
     sdk: flutter
   provider: ^6.1.2

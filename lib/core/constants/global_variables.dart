@@ -16,4 +16,9 @@ class GlobalVariables {
   static const width30 = SizedBox(width: 30);
   static const width40 = SizedBox(width: 40);
   static const width50 = SizedBox(width: 50);
+  static const gradient =  LinearGradient(
+            colors: [Color(0xFF99B7CF), Colors.amber],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          );
 }
