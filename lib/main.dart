@@ -1,13 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyhub/core/constants/global_variables.dart';
 import 'package:studyhub/domain/provider/post_provider.dart';
 import 'package:studyhub/domain/provider/register_provider.dart';
-import 'package:studyhub/screens/login/login_screen.dart';
+import 'package:studyhub/firebase_options.dart';
 import 'package:studyhub/screens/main_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+
+  return runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +28,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => RegisterProvider(),
         ),
-        ChangeNotifierProvider(create: (context) => PostProvider(),)
+        ChangeNotifierProvider(
+          create: (context) => PostProvider(),
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -34,7 +43,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MainSCreen(),
+        home: MainSCreen(),
       ),
     );
   }

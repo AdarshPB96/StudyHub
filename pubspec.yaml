@@ -31,8 +31,12 @@ dependencies:
   csc_picker: ^0.2.7
   cupertino_icons: ^1.0.2
   file_picker: ^8.0.0+1
+  firebase_app_installations: ^0.2.4+17
+  firebase_core: 2.27.0
+  firebase_storage: ^11.6.9
   flutter:
     sdk: flutter
+  http: null
   provider: ^6.1.2
 
 dev_dependencies:

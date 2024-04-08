@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:studyhub/screens/add_post/add_post_screen.dart';
 import 'package:studyhub/screens/chats/chat_screen.dart';

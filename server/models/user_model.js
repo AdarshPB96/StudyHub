@@ -14,16 +14,14 @@ const userSchema = new mongoose.Schema({
     state: String,
     city: String,
     studyingFor: String, 
+    profilePicUrl:String,
     schoolOrCollegeOrInsti: String, 
     interests: [String],
     password: {
       type: String,
       required: true
     },
-    confirmPassword: {
-      type: String,
-      required: true
-    },
+
     termsAgreed: Boolean
   });
   

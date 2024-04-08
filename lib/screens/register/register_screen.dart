@@ -14,10 +14,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
-    TextEditingController firstNameController = TextEditingController();
-    TextEditingController lastNameController = TextEditingController();
-    // TextEditingController Controller = TextEditingController();
-    // TextEditingController nameController = TextEditingController();
+
     final registerProvider =
         Provider.of<RegisterProvider>(context, listen: false);
     return SafeArea(
@@ -44,13 +41,13 @@ class RegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextFieldwithHeading(
-                        controller: firstNameController,
+                        controller: registerProvider.firstNameController,
                         w: w,
                         h: h,
                         heading: 'First name',
                         hinttext: 'First name'),
                     TextFieldwithHeading(
-                        controller: lastNameController,
+                        controller: registerProvider.lastNameController,
                         w: w,
                         h: h,
                         heading: 'Last name',
@@ -120,14 +117,14 @@ class RegisterScreen extends StatelessWidget {
                 GlobalVariables.height20,
                 GlobalVariables.height20,
                 TextFieldwithHeading(
-                    controller: firstNameController,
+                    controller: registerProvider.studyingforController,
                     w: w * 3,
                     h: h,
                     heading: 'Your are studying for',
                     hinttext: 'Studying for'),
                 GlobalVariables.height20,
                 TextFieldwithHeading(
-                    controller: firstNameController,
+                    controller: registerProvider.schoolCollegeController,
                     w: w * 3,
                     h: h,
                     heading: 'School/College/Institute',
@@ -155,14 +152,21 @@ class RegisterScreen extends StatelessWidget {
                     })),
                 GlobalVariables.height20,
                 TextFieldwithHeading(
-                    controller: firstNameController,
+                    controller: registerProvider.emailController,
+                    w: w * 3,
+                    h: h,
+                    heading: 'Email',
+                    hinttext: 'Enter your email'),
+                GlobalVariables.height20,
+                TextFieldwithHeading(
+                    controller: registerProvider.passwordController,
                     w: w * 3,
                     h: h,
                     heading: 'Password',
                     hinttext: 'Enter a password'),
                 GlobalVariables.height20,
                 TextFieldwithHeading(
-                    controller: firstNameController,
+                    controller: registerProvider.confirmController,
                     w: w * 3,
                     h: h,
                     heading: 'Confirm Password',
@@ -180,7 +184,30 @@ class RegisterScreen extends StatelessWidget {
                   ],
                 ),
                 GlobalVariables.height20,
-                CustomElevatedButton(onTap: () {}, text: 'Register'),
+                CustomElevatedButton(
+                  onTap: () {
+                    final userData = {
+                      'firstName': registerProvider.firstNameController.text,
+                      'lastName': registerProvider.lastNameController.text,
+                      'studyingFor':
+                          registerProvider.studyingforController.text,
+                      'schoolOrCollegeOrInsti':
+                          registerProvider.schoolCollegeController.text,
+                      'password': registerProvider.passwordController.text,
+                      'email': registerProvider.emailController.text,
+                      'dateOfBirth': registerProvider.dateOfBirth
+                          .toString(), // Convert DateTime to string as needed
+                      'country': registerProvider.country,
+                      'state': registerProvider.state,
+                      'city': registerProvider.city,
+                      'interests': registerProvider.selectedInterests
+                          .join(','), // Convert List to comma-separated string
+                      'termsAgreed': registerProvider.isAgreed,
+                    };
+                    registerProvider.registerUser(userData);
+                  },
+                  text: 'Register',
+                )
               ],
             ),
           ),
@@ -240,6 +267,9 @@ class LocationDropdownsState extends State<LocationDropdowns> {
 
   @override
   Widget build(BuildContext context) {
+    final registerProvider =
+        Provider.of<RegisterProvider>(context, listen: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -247,59 +277,46 @@ class LocationDropdownsState extends State<LocationDropdowns> {
         CSCPicker(
           showStates: true,
           showCities: true,
-
           flagState: CountryFlag.DISABLE,
           dropdownDecoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: Colors.white,
-              border: Border.all(color: Colors.grey.shade300, width: 1)),
-
-          ///Disabled Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER]  (USE with disabled dropdownDecoration)
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Colors.white,
+            border: Border.all(color: Colors.grey.shade300, width: 1),
+          ),
           disabledDropdownDecoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.grey.shade300,
-              border: Border.all(color: Colors.grey.shade300, width: 1)),
-
-          ///placeholders for dropdown search field
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: Colors.grey.shade300,
+            border: Border.all(color: Colors.grey.shade300, width: 1),
+          ),
           countrySearchPlaceholder: "Country",
           stateSearchPlaceholder: "State",
           citySearchPlaceholder: "City",
-
-          ///labels for dropdown
           countryDropdownLabel: "*Country",
           stateDropdownLabel: "*State",
           cityDropdownLabel: "*City",
-          // countryFilter: [
-          //   CscCountry.India,
-          //   CscCountry.United_States,
-          //   CscCountry.Canada
-          // ],
-
-          ///selected item style [OPTIONAL PARAMETER]
           selectedItemStyle: const TextStyle(
             color: Colors.black,
             fontSize: 14,
           ),
           onCountryChanged: (value) {
             setState(() {
-              ///store value in country variable
               countryValue = value;
+              registerProvider
+                  .setCountry(value); // Set country value in provider
             });
           },
-
-          ///triggers once state selected in dropdown
           onStateChanged: (value) {
             setState(() {
-              ///store value in state variable
               stateValue = value.toString();
+              registerProvider
+                  .setState(value.toString()); // Set state value in provider
             });
           },
-
-          ///triggers once city selected in dropdown
           onCityChanged: (value) {
             setState(() {
-              ///store value in city variable
               cityValue = value.toString();
+              registerProvider
+                  .setCity(value.toString()); // Set city value in provider
             });
           },
         ),

@@ -84,7 +84,7 @@ class CustomElevatedButton extends StatelessWidget {
               fontSize: 18),
         ),
         style: ElevatedButton.styleFrom(
-          elevation: 0, // Remove elevation
+    
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

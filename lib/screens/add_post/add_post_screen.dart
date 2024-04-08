@@ -36,10 +36,15 @@ class AddPostScreen extends StatelessWidget {
                         },
                         icon: Icon(Icons.add)),
                     GlobalVariables.width20,
-                    ElevatedButton(onPressed: () {}, child: Text('Post'))
+                    ElevatedButton(
+                        onPressed: () {
+                          provider.uploadPost('6610def95e9dcd45be33858c');
+                        },
+                        child: Text('Post'))
                   ],
                 ),
                 TextField(
+                  controller: provider.postTextController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     labelText: "Type your description",
@@ -49,31 +54,36 @@ class AddPostScreen extends StatelessWidget {
                 GlobalVariables.height10,
                 Consumer<PostProvider>(
                   builder: (context, value, child) {
-                    return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final file = value.selectedFiles[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Container(
-                              color: Colors.grey.shade300,
-                              width: double.infinity,
-                              height: h * 0.4,
-                              child: Stack(
-                                children: [
-                                  if (file != null) ...[
-                                    _buildFileWidget(file),
-                                    _buildCloseButtonAndName(
-                                        file.path.split('/').last, () {
-                                      value.removeFile(index);
-                                    }),
-                                  ],
-                                ],
-                              )),
-                        );
-                      },
-                      itemCount: value.selectedFiles.length ?? 0,
+                    return Stack(
+                      children: [
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final file = value.selectedFiles[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Container(
+                                  color: Colors.grey.shade300,
+                                  width: double.infinity,
+                                  height: h * 0.4,
+                                  child: Stack(
+                                    children: [
+                                      if (file != null) ...[
+                                        _buildFileWidget(file),
+                                        _buildCloseButtonAndName(
+                                            file.path.split('/').last, () {
+                                          value.removeFile(index);
+                                        }),
+                                      ],
+                                    ],
+                                  )),
+                            );
+                          },
+                          itemCount: value.selectedFiles.length ?? 0,
+                        ),
+                        if (value.loading) LinearProgressIndicator(),
+                      ],
                     );
                   },
                 )

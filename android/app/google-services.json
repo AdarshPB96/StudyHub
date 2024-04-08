@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "279338980315",
+    "project_id": "studyhub-533bb",
+    "storage_bucket": "studyhub-533bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279338980315:android:f9bdcecfb5919db59ccdfe",
+        "android_client_info": {
+          "package_name": "com.example.studyhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY-fKDW7GD7qsDRXet6Jp7eGOmd4VsP_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
